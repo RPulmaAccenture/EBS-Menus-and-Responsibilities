@@ -1,0 +1,6770 @@
+# $Header$
+
+# dbdrv: exec fnd bin FNDLOAD bin &phase=daa+51 checkfile:~PROD:~PATH:~FILE &ui_apps 0 Y UPLOAD @FND:patch/115/import/afsload.lct @~PROD:~PATH/~FILE
+LANGUAGE = "US"
+LDRCONFIG = "afsload.lct 120.2.12010000.1"
+
+#Source Database DNBT2I
+
+#RELEASE_NAME 12.1.3
+
+# -- Begin Entity Definitions -- 
+
+DEFINE MENU
+  KEY   MENU_NAME                       VARCHAR2(4000)
+  BASE  TYPE                            VARCHAR2(30)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  TRANS USER_MENU_NAME                  VARCHAR2(80)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+  CTX   OWNER                           VARCHAR2(4000)
+
+  DEFINE ENTRY
+    TRANS PROMPT                          VARCHAR2(60)
+    TRANS DESCRIPTION                     VARCHAR2(240)
+    BASE  GRANT_FLAG                      VARCHAR2(1)
+    BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+    CTX   SUBMENU                         REFERENCES MENU
+    CTX   FUNCTION                        REFERENCES FUNCTION
+    CTX   OWNER                           VARCHAR2(4000)
+  END ENTRY
+END MENU
+
+DEFINE FUNCTION
+  KEY   FUNCTION_NAME                   VARCHAR2(4000)
+  BASE  FORM                            REFERENCES FORM
+  BASE  TYPE                            VARCHAR2(30)
+  BASE  PARAMETERS                      VARCHAR2(4000)
+  BASE  WEB_HOST_NAME                   VARCHAR2(4000)
+  BASE  WEB_AGENT_NAME                  VARCHAR2(4000)
+  BASE  WEB_HTML_CALL                   VARCHAR2(4000)
+  BASE  WEB_ENCRYPT_PARAMETERS          VARCHAR2(4000)
+  BASE  WEB_SECURED                     VARCHAR2(4000)
+  BASE  WEB_ICON                        VARCHAR2(4000)
+  BASE  FUNC_OBJECT                     REFERENCES OBJECT
+  BASE  OBJECT_NAME                     REFERENCES OBJECT
+  BASE  REGION_APPLICATION_SHORT_NAME   VARCHAR2(50)
+  BASE  REGION_APPLICATION_NAME         VARCHAR2(50)
+  BASE  REGION_CODE                     VARCHAR2(4000)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  BASE  MAINTENANCE_MODE_SUPPORT        VARCHAR2(8)
+  BASE  CONTEXT_DEPENDENCE              VARCHAR2(8)
+  BASE  JRAD_REF_PATH                   VARCHAR2(4000)
+  TRANS USER_FUNCTION_NAME              VARCHAR2(80)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+  CTX   OWNER                           VARCHAR2(4000)
+END FUNCTION
+
+DEFINE OBJECT
+  KEY   OBJ_NAME                        VARCHAR2(4000)
+  BASE  APPLICATION_SHORT_NAME          VARCHAR2(50)
+  BASE  DATABASE_OBJECT_NAME            VARCHAR2(30)
+  BASE  PK1_COLUMN_NAME                 VARCHAR2(30)
+  BASE  PK2_COLUMN_NAME                 VARCHAR2(30)
+  BASE  PK3_COLUMN_NAME                 VARCHAR2(30)
+  BASE  PK4_COLUMN_NAME                 VARCHAR2(30)
+  BASE  PK5_COLUMN_NAME                 VARCHAR2(30)
+  BASE  PK1_COLUMN_TYPE                 VARCHAR2(8)
+  BASE  PK2_COLUMN_TYPE                 VARCHAR2(8)
+  BASE  PK3_COLUMN_TYPE                 VARCHAR2(8)
+  BASE  PK4_COLUMN_TYPE                 VARCHAR2(8)
+  BASE  PK5_COLUMN_TYPE                 VARCHAR2(8)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  TRANS DISPLAY_NAME                    VARCHAR2(240)
+  TRANS DESCRIPTION                     VARCHAR2(2000)
+  CTX   OWNER                           VARCHAR2(4000)
+END OBJECT
+
+DEFINE FORM
+  KEY   APPLICATION_SHORT_NAME          VARCHAR2(4000)
+  KEY   FORM_NAME                       VARCHAR2(4000)
+  BASE  AUDIT_ENABLED_FLAG              VARCHAR2(1)
+  BASE  LAST_UPDATE_DATE                VARCHAR2(10)
+  TRANS USER_FORM_NAME                  VARCHAR2(80)
+  TRANS DESCRIPTION                     VARCHAR2(240)
+  CTX   OWNER                           VARCHAR2(4000)
+END FORM
+
+# -- End Entity Definitions -- 
+
+
+BEGIN MENU "*NULL*"
+  LAST_UPDATE_DATE = "2013/06/24"
+  USER_MENU_NAME = "*NULL*"
+  OWNER = "ORACLE12.1.3"
+
+END MENU
+
+BEGIN FUNCTION "POS_ISP_BRAND"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/02/12"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "iSupplier Portal"
+  DESCRIPTION = "iSupplier Portal Branding Function"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "ICX_CLOSE"
+  FORM = "" "*NULL*"
+  TYPE = "WWW"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OALogout.jsp"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "global_closewind_greyscale.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Close"
+  DESCRIPTION = "Global Function to close the window"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "ICX_RETURN_TO_PORTAL"
+  FORM = "" "*NULL*"
+  TYPE = "WWW"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OracleNavigate.Responsibility"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "returntoportal_greyscale.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Return to Portal"
+  DESCRIPTION = "Function to return you to the Self Service Home Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "ICX_LOGOUT"
+  FORM = "" "*NULL*"
+  TYPE = "WWW"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OALogout.jsp"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "logout_greyscale.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Logout"
+  DESCRIPTION =
+ "Global Function to logout of the system and take you to the main login screen"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "ICX_USER_PREFERENCES"
+  FORM = "" "*NULL*"
+  TYPE = "WWW"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OracleApps.DU"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "FNDPREFS.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_APPLICATION_SHORT_NAME = "FND"
+  REGION_APPLICATION_NAME = "FND"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "General Preferences"
+  DESCRIPTION = "Set personal information including password and language."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "ICX_HELP"
+  FORM = "" "*NULL*"
+  TYPE = "WWW"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "fndgfm/fnd_help.get/US/FND/@ICXPHP"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "help_greyscale.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Self Service Help"
+  DESCRIPTION = "Function to show help page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "ICX_SSWA_USER_PREFERENCES"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/fnd/preferences/webui/PreferencesPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "FNDPREFS.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/04/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "NONE"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "New General Preferences"
+  DESCRIPTION =
+ "This Preference Function points to new SSWA Pref Function (OAF5.7C Above)"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "OAM_UALERT_PAGE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?region=/oracle/apps/fnd/oam/diag/alerts/ReportProblemPage"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "OAM User Alert Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "UMX_MY_APP_ACCESS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/fnd/umx/accessRequest/webui/MyAppAccessPG&akRegionApplicationId=0"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "User Management - My Application Access"
+  DESCRIPTION = "Function for My Application Access (ART)"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "FND_MANAGE_PROXIES"
+  FORM = "" "*NULL*"
+  TYPE = "WWW"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/fnd/umx/proxy/webui/ManageProxiesPG&akRegionApplicationId=0"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "NONE"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Manage Proxies Page"
+  DESCRIPTION = "Function for the Manage Proxies Page UI"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "FND_GEN_PREF_MENU"
+  LAST_UPDATE_DATE = "2008/11/14"
+  USER_MENU_NAME = "General Pref Menu"
+  DESCRIPTION = "OA Based Apps General Preference Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Display Preferences"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_SSWA_USER_PREFERENCES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Access Requests"
+    DESCRIPTION = "Self Service Requests for Additional Access"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "UMX_MY_APP_ACCESS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Manage Proxies"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "FND_MANAGE_PROXIES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "FND_PREF_MENU_SIDEBAR"
+  TYPE = "SIDEBAR"
+  LAST_UPDATE_DATE = "2008/11/14"
+  USER_MENU_NAME = "Pref Menu SideBar"
+  DESCRIPTION = "OA based Preference Menu Sidebar"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "General"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "FND_GEN_PREF_MENU"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "ICX_STANDARD_GLOBAL_MENU"
+  TYPE = "GLOBAL"
+  LAST_UPDATE_DATE = "2008/11/14"
+  USER_MENU_NAME = "ICX_STANDARD_GLOBAL_MENU"
+  DESCRIPTION = "Global Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Close Window"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_CLOSE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Home"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_RETURN_TO_PORTAL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Logout"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_LOGOUT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Preferences"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_USER_PREFERENCES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Help"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_HELP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION =
+ "This Preference Function points to new SSWA Perf Function (OAF5.7C Above)"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_SSWA_USER_PREFERENCES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Contact Admin"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "OAM_UALERT_PAGE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Preference Menu(5.10C above)"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/04/30"
+    SUBMENU = "FND_PREF_MENU_SIDEBAR"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_HT_SP_B_SUPP"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/SuppSummPG&OASF=POS_HT_SP_B_SUPP&retainAM=N"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/01/10"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Supplier Search Page"
+  DESCRIPTION = "Supplier Search Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_QUK_UPD"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/QuickUpdatePG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Quick Update Page"
+  DESCRIPTION = "Quick Update Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_B_SIDE_BAR"
+  TYPE = "SIDEBAR"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Supplier: Side Bar (Buyer View)"
+  DESCRIPTION = "Supplier: Side Bar"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_QUK_UPD"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_HT_SP_B_ORG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/OrganizationPG&retainAM=Y&OASF=POS_HT_SP_B_ORG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/03/22"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Organization Page"
+  DESCRIPTION = "Supplier Organization Details Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_TAX_DT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrTaxDtPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Tax Details Page"
+  DESCRIPTION = "Create Supplier: Collect Details Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_ADDR_BK"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrAddrBkPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Address Book"
+  DESCRIPTION = "Supplier: Supplier Address Book"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_CONT_DIR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrCntctDirPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/12"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Contact Directory"
+  DESCRIPTION = "Contact Directory"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_BUS_CLSS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/BusClassPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Business Classification Page"
+  DESCRIPTION = "Business Classifications"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_PS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/components/webui/PosPSMainPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/01/12"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Product and Services Page"
+  DESCRIPTION = "Supplier: Buyer View: Product and Services Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_ORG_CRT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/SuppCrtPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Create Supplier Page"
+  DESCRIPTION = "Create Supplier Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_ADDR_PG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrAddrPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Create Supplier Page"
+  DESCRIPTION = "Create Supplier Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_CRT_ST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrCrtStPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Create & Update Sites Page"
+  DESCRIPTION = "Create & Update Sites Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_MNG_ST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrMngSitesPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Manage Address Sites"
+  DESCRIPTION = "Supplier: Manage Supplier Sites Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrMainPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/13"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Banking Buyer Main Page"
+  DESCRIPTION = "Supplier Banking Buyer Main Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_APPROVE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrApprPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/13"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Approve Bank Account"
+  DESCRIPTION = "Buyer Approve Bank Account"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_MNG_ADDR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrMngASPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Manage Address Assignments"
+  DESCRIPTION = "Buyer Manage Address Assignments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_PRENOTE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrPreNotePG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Prenote Bank Account"
+  DESCRIPTION = "Buyer Prenote Bank Account"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SBD_B_MENU"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Buyer Banking Menu"
+  DESCRIPTION = "Buyer Banking Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_APPROVE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_MNG_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_PRENOTE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_HT_SP_B_CONT_ADD"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrAddCntctPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Create & Update Contacts Page"
+  DESCRIPTION = "Create & Update Contacts Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_SEL_REST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/components/webui/PosSelUsrRestPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Set Securing Attributes Page"
+  DESCRIPTION = "Set Securing Attributes Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_PS_NEW"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/components/webui/PosPSNewPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for adding a new Product and services"
+  DESCRIPTION = "Function for adding a new Product and services"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_PS_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/components/webui/PosPSConfPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for showing confirmation for P and S"
+  DESCRIPTION =
+ "Function for showing confirmation message for Product and services"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_PS_SUB_CAT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/components/webui/PosPSSubCatPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for View Subcategory in Product and services"
+  DESCRIPTION = "Function for View Subcategory in Product and services"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_PS_ERROR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/components/webui/PosPSErrorPG&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for Error Page in Product and services"
+  DESCRIPTION = "Function for Error Page in Product and services"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_CHG_ADDR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/request/webui/PosAddrChgComparePG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Updated Address Approval"
+  DESCRIPTION = "Supplier: Buyer View: Updated Address Approval"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_CHG_CONT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/request/webui/PosContChgComparePG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Updated Contact Approval"
+  DESCRIPTION = "Supplier: Buyer View: Updated Contact Approval"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SURVEY_PG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/survey/webui/SurveysPG&ISPMODE=BUYER&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/06/07"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer View: Surveys"
+  DESCRIPTION = "Buyer View: Surveys"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_TAX_DT_ST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrTaxDtStPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/11/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Tax Details for sites"
+  DESCRIPTION = "Supplier: Buyer View: Tax Details for sites"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_MNG_ST_FLEX"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrMngSitesFlexPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/12/07"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Manage Address Sites Flex"
+  DESCRIPTION = "Supplier: Manage Supplier Sites Flex Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_RMV_ADDR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/request/webui/ByrAddrWrnPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/03/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Address Removal Warning"
+  DESCRIPTION = "Address Removal Warning Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_CRT_EMP_ST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrCrtEmpStPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/05/31"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Create Employee Sites Page"
+  DESCRIPTION = "Create Employee Sites Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_DQM_PG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sdh/dqm/webui/CreateSupplierDqmPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2009/11/24"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Create Supplier DQM Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_B_CP"
+  TYPE = "SIDEBAR"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Supplier : Company Profile"
+  DESCRIPTION = "Supplier: Company Profile : Side List"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Organization"
+    DESCRIPTION = "Organization Detail"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ORG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Tax Details"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_TAX_DT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Address Book"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ADDR_BK"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Contact Directory"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CONT_DIR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Business Classification"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_BUS_CLSS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Products & Services"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_PS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ORG_CRT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ADDR_PG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CRT_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_MNG_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Banking Details"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_SBD_B_MENU"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CONT_ADD"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_SEL_REST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_PS_NEW"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_PS_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_PS_SUB_CAT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_PS_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CHG_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CHG_CONT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Surveys"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SURVEY_PG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_TAX_DT_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_MNG_ST_FLEX"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_RMV_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CRT_EMP_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/11/24"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_DQM_PG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_APPROVAL_HISTORY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ApprovalHistoryPG&retainAM=Y&submitFunc=SuppProfile"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2013/12/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Approval History"
+  DESCRIPTION = "Approval History"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_B_AH"
+  TYPE = "SIDEBAR"
+  LAST_UPDATE_DATE = "2013/12/05"
+  USER_MENU_NAME = "Supplier: Buyer View: Approval History"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2013/12/05"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_APPROVAL_HISTORY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_HT_SP_B_ACCT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrAcctPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Accounts Page"
+  DESCRIPTION = "Supplier: Supplier Accounts Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_TAX_RPT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrTaxRptPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Tax and Reporting"
+  DESCRIPTION = "Tax and Reporting"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_PURCH"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrPurchPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Purchasing"
+  DESCRIPTION = "Purchasing"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_RCV"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrRcvPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Receiving"
+  DESCRIPTION = "Receiving"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_PAY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrPayPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Payment Details"
+  DESCRIPTION = "Payment Details"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_RELATIONSHIP"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/PosRelationshipSetupPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/12/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Relationship"
+  DESCRIPTION = "Create relationship for third party payments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BYR_PAY_SITE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrPaySitePG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/13"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Site Payment Method Page"
+  DESCRIPTION = "Supplier Payment Method Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_INV_MNG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrInvPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Invoice Management"
+  DESCRIPTION = "Invoice Management"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_TAX_RPT_ST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/supplier/webui/ByrTaxRptStPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/11/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Tax and Reporting for sites"
+  DESCRIPTION = "Supplier: Buyer View: Tax and Reporting for sites"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_B_TC"
+  TYPE = "SIDEBAR"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Supplier : Terms and Control"
+  DESCRIPTION = "Supplier : Terms and Control (Side List)"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Accounting"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ACCT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Tax and Reporting"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_TAX_RPT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Purchasing"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_PURCH"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Receiving"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_RCV"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Payment Details"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_PAY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Relationship"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_RELATIONSHIP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ORG_CRT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_ADDR_PG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CRT_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_MNG_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BYR_PAY_SITE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Invoice Management"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_INV_MNG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_TAX_RPT_ST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_MNG_ST_FLEX"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_HT_SP_B_SUBTAB"
+  TYPE = "SUBTAB"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Supplier : Sub Tab"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Quick Update"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_HT_SP_B_SIDE_BAR"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Company Profile"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_HT_SP_B_CP"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Approval History"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2013/12/05"
+    SUBMENU = "POS_HT_SP_B_AH"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Terms and Control"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_HT_SP_B_TC"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_FLEXREG_NEWREQ_SEARCH"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/onboard/webui/NewSuppReqSearchPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/03/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration New Request Search Page"
+  DESCRIPTION = "Flexiable Registration New Request Search Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_PROS_SEARCH"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/onboard/webui/ProspRegSearchPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/03/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME =
+ "Flexible Registration Prospective Registration Search Page"
+  DESCRIPTION = "Flexiable Registration Prospective Registration Search Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_APPROVER"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/onboard/webui/FlexRegApproverPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Approver Page"
+  DESCRIPTION = "Flexiable Registration Approver Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_ADD_ADDR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/request/webui/AddAddrRequestPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Add Address Page"
+  DESCRIPTION = "Flexiable Registration Add Address Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_ADD_CONT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/onboard/webui/AddSupplierContactPG.xml"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Add Contact Page"
+  DESCRIPTION = "Flexiable Registration Add Contact Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_ADD_PS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/onboard/webui/FlexRegAddPSReqPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Add Product Service Page"
+  DESCRIPTION = "Flexiable Registration Add Product Service Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_SUPPLIER_REG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/SuppRegActPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/08/31"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration New/Edit Bank Account"
+  DESCRIPTION = "Supplier Registration New/Edit Bank Account"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_DUNB_SUMMARY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sdh/dnb/webui/SuppDnbSummPG&hzSubFunction=Summary&locContentSrc=USER_ENTERED&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2009/10/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "POS D and B Summary Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_ORG_CLASSIFICATION"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sdh/classification/webui/PosOrgClassificationProfile"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2009/08/31"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "General and Industrial Classification Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_EXT_ATTR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sdh/ext/user/webui/ProspAttrPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2009/09/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Supplier Attributes Page"
+  DESCRIPTION = "Flexible Registration Supplier Attributes Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_GEN_RFI"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/onboard/webui/GenerateRFIPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2009/09/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Generate RFI Page"
+  DESCRIPTION = "Flexible Registration Generate RFI Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_UPDATE_PARTY_ADDRESS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sdh/dqm/webui/PosUpdPartyAddrPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2009/11/30"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Update Party Address"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_REG_SAVE"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/09/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration: Save"
+  DESCRIPTION = "Supplier Registration: Save"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_REG_SUBMIT"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/09/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration: Register"
+  DESCRIPTION = "Supplier Registration: Register"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_REG_APPROVE_REJECT"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/09/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration: Approve Reject"
+  DESCRIPTION = "Supplier Registration: Approve Reject"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_REG_NOTIFY"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/09/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration: Notify"
+  DESCRIPTION = "Supplier Registration: Notify"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_REG_APPLY_TEMPLATE"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/09/09"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration: Apply Template"
+  DESCRIPTION = "Supplier Registration: Apply Template"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_FLEXREG_APPROVER_MENU"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Flexible Registration Approver Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "New Request Search Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_NEWREQ_SEARCH"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Prospective Registration Search Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_PROS_SEARCH"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Approver Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_APPROVER"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Address Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ADD_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Contact Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ADD_CONT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Product Service Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ADD_PS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Bank Account Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_SUPPLIER_REG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "D&B Summary Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/03"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_DUNB_SUMMARY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "General and Industrial Classification Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/03"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ORG_CLASSIFICATION"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/05"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_EXT_ATTR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/05"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_GEN_RFI"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/11/30"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_UPDATE_PARTY_ADDRESS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/09/09"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_REG_SAVE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/09/09"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_REG_SUBMIT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/09/09"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_REG_APPROVE_REJECT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/09/09"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_REG_NOTIFY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/09/09"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_REG_APPLY_TEMPLATE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_SUPPLIER_ADDR_REQ_FUNC"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/request/webui/PosPrfChgContPG&directQueryItem=0&addBreadCrumb=Y&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for Supplier Address Requests"
+  DESCRIPTION = "Function for Supplier Address Requests"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPPLIER_BC_REQ_FUNC"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/request/webui/PosPrfChgContPG&directQueryItem=2&addBreadCrumb=Y&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for Supplier Business Classification Requests"
+  DESCRIPTION = "Function for Supplier Business Classification Requests"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPPLIER_CONT_REQ_FUNC"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/request/webui/PosPrfChgContPG&directQueryItem=1&addBreadCrumb=Y&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for Supplier Contact Requests"
+  DESCRIPTION = "Function for Supplier Contact Requests"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPPLIER_PS_REQ_FUNC"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/request/webui/PosPrfChgContPG&directQueryItem=3&addBreadCrumb=Y&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/10/05"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Function for Supplier Product and services Requests"
+  DESCRIPTION = "Function for Supplier Product and services Requests"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_NEW_CONT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/request/webui/PosNewContReqPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: New Contact Approval"
+  DESCRIPTION = "Supplier: Buyer View: New Contact Approval"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_NEW_ADDR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/request/webui/PosNewAddrReqPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: New Address Approval"
+  DESCRIPTION = "Supplier: Buyer View: New Address Approval"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_SEL_USR_REST"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/request/webui/PosSelUserRestPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Select User Restrictions"
+  DESCRIPTION = "Supplier: Buyer View: Select User Restrictions"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_APV_ALL_ACT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrMainAprPG&retainAM=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/11/03"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Bank Account Requests"
+  DESCRIPTION = "All Bank Account Requests from Suppliers"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_NEW_ADDR_SITES"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/request/webui/PosNewAddrSitePG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/11/20"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Buyer View: Site Creation for New Address"
+  DESCRIPTION = "Supplier: Buyer View: Site Creation for New Address"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_B_SUPP_PBWC"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/SuppSummPG&OASF=POS_HT_SP_B_SUPP_PBWC&OAHP=PO_BUYER_HOME_PAGE&OAPB=PO_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/09/27"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Professional Buyer Work Center: Supplier Search"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_B_TAB"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "HTML Supplier Tab Main"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_SUPP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_HT_SP_B_SUBTAB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_FLEXREG_APPROVER_MENU"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIER_ADDR_REQ_FUNC"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIER_BC_REQ_FUNC"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIER_CONT_REQ_FUNC"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIER_PS_REQ_FUNC"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_PS_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_PS_SUB_CAT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CHG_CONT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_NEW_CONT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_CHG_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_NEW_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_SEL_USR_REST"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_APV_ALL_ACT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_NEW_ADDR_SITES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_SUPP_PBWC"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_NOTIF_LINK_REDIRECT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/PosNotifLinkRedirectPG&OAHP=POS_HT_SP_HP&OASF=POS_HT_SP_B_SUPP"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/07/12"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Notification link redirection page."
+  DESCRIPTION = "Notification link redirection page."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPPLIERS_BRAND"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/08/08"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Suppliers"
+  DESCRIPTION = "Branding function for managing suppliers user interface"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_HP"
+  TYPE = "HOMEPAGE"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Supplier : Home Page (Buyer View)"
+  DESCRIPTION = "Supplier : Home Page (Buyer View)"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ISP_BRAND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "ICX_STANDARD_GLOBAL_MENU"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Suppliers"
+    DESCRIPTION = "Supplier Menu"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_HT_SP_B_TAB"
+    FUNCTION = "POS_HT_SP_B_SUPP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_NOTIF_LINK_REDIRECT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Branding function"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIERS_BRAND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_HT_SP_ACCESS_FULL"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Full Access : Buyer View"
+  DESCRIPTION = "Supplier Full Access : Buyer View"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_HT_SP_EMP_SUPPLIER"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/05/23"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Create/Update employee supplier details"
+  DESCRIPTION = "Create/Update employee supplier details"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_HT_SP_FULL_ACCESS_MENU"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2009/08/18"
+  USER_MENU_NAME = "Supplier Information Management (Buyer View)"
+  DESCRIPTION = "Supplier Information Management"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "POS_HT_SP_HP"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_ACCESS_FULL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier Search"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_B_SUPP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "N"
+    LAST_UPDATE_DATE = "2009/08/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_HT_SP_EMP_SUPPLIER"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "AP_APXVDMVD"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/supplier/webui/SuppSummPG&OAHP=POS_HT_SP_HP&OASF=POS_HT_SP_B_SUPP&OAPB=AP_PAY_PRODUCT_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/10/27"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Suppliers"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "SQLAP" "APXVDDUP"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "2001/04/23"
+  USER_FORM_NAME = "Vendor Merge"
+  DESCRIPTION = "Merge invoices and purchase orders for vendors"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "AP_APXVDDUP"
+  FORM = "SQLAP" "APXVDDUP"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Merge Suppliers"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "PO" "POXQUEMQ"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "Enter Vendor Quotation Lists"
+  DESCRIPTION = "Enter Vendor Quotation Lists"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "PO_POXQUEMQ"
+  FORM = "PO" "POXQUEMQ"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Lists"
+  DESCRIPTION = "Supplier Lists"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "PO" "POXSCASL"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "Define Approved Supplier List"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "PO_POXSCASL"
+  FORM = "PO" "POXSCASL"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Define Approved Supplier List"
+  DESCRIPTION = "Define Approved Supplier List"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "PO" "POXSVASL"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "Summary Approved Supplier List"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "PO_POXSVASL"
+  FORM = "PO" "POXSVASL"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Summary Approved Supplier List"
+  DESCRIPTION = "Summary Approved Supplier List"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "PO" "POXSTASL"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "Setup Approved Supplier List"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "PO_POXSTASL"
+  FORM = "PO" "POXSTASL"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Setup Approved Supplier List"
+  DESCRIPTION = "Setup Approved Supplier List"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "MRP" "MRPFDDSR"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "Define Sourcing Rules"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "MRPFDDSRDSR"
+  FORM = "MRP" "MRPFDDSR"
+  TYPE = "FORM"
+  PARAMETERS = "type=1"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Define Sourcing Rule"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "MRP" "MRPFDSRA"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "Define Bills of Distribution"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "MRPFDSRADSA"
+  FORM = "MRP" "MRPFDSRA"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Sourcing Assignments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "JG_ENABLE_GLOBAL_FLEX"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/06/22"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "JG Global Flexfield enabled flag"
+  DESCRIPTION = "JG Global Flexfield enabled flag"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "MRP" "MRPFVSAH"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "View Sourcing Assignment Hiearchy"
+  DESCRIPTION = "View Sourcing Assignment Hierarchy"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "MRPFVSAH"
+  FORM = "MRP" "MRPFVSAH"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Sourcing Assignment Hierarchy"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "MRPFDSRAVSA"
+  FORM = "MRP" "MRPFDSRA"
+  TYPE = "FORM"
+  PARAMETERS = "mrp_query_only=Y"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Sourcing Assignments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "MRPFDDSRVSR"
+  FORM = "MRP" "MRPFDDSR"
+  TYPE = "FORM"
+  PARAMETERS = "type=1 mrp_query_only=TRUE"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Sourcing Rule"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "MRPFDDSRVBD"
+  FORM = "MRP" "MRPFDDSR"
+  TYPE = "FORM"
+  PARAMETERS = "type=2 mrp_query_only=TRUE"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Bill of Distribution"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FORM "MRP" "MRPFVSCB"
+  AUDIT_ENABLED_FLAG = "N"
+  LAST_UPDATE_DATE = "1997/06/12"
+  USER_FORM_NAME = "View Supply Chain Bill"
+  DESCRIPTION = "View Supply Chain Bill"
+  OWNER = "ORACLE12.1.3"
+END FORM
+
+BEGIN FUNCTION "MRPFVSVBVSA"
+  FORM = "MRP" "MRPFVSCB"
+  TYPE = "FORM"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "*NULL*"
+  WEB_SECURED = "*NULL*"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Supply Chain Bill"
+  DESCRIPTION = "`"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "PO_SUPPLY_BASE_FUNCTIONS"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "1997/12/02"
+  USER_MENU_NAME = "Supply Base:  SubFunctions"
+  DESCRIPTION = "Supply Base:  SubFunctions"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "View Sourcing Assignment Hierarchy"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFVSAH"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "View Sourcing Assignments"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFDSRAVSA"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "View Sourcing Rule"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFDDSRVSR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "View Bill of Distribution"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFDDSRVBD"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "View Supply Chain Bill"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFVSVBVSA"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_REG_INVITE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/InviteMainPG&OAHP=POS_SUPP_USER_ADMIN_HP&OASF=POS_REG_INVITE&OAPB=POS_ISP_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Invite Supplier User to Register"
+  DESCRIPTION = "This function invites external supplier user to register"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_REGISTER"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/RegSuppUserPG&OAHP=POS_SUPP_USER_ADMIN_HP&OASF=POS_REG_REGISTER&OAPB=POS_ISP_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/02/20"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Register Supplier User"
+  DESCRIPTION = "This function creates an external supplier user"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SUP_USER_CREATION"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2003/02/19"
+  USER_MENU_NAME = "Supplier User Creation"
+  DESCRIPTION = "POS Supplier User Creation Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Invite Supplier User"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/02/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_INVITE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Register Supplier User"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/02/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_REGISTER"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_REG_APPROVE_EXT_USERS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/administration/webui/UserSummPG&OAHP=POS_SUPP_USER_ADMIN_HP&OASF=POS_REG_APPROVE_EXT_USERS&OAPB=POS_ISP_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier User Administration"
+  DESCRIPTION =
+ "This function approves the external supplier users who have registered."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SUP_USER_PROF_ADMIN"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2003/02/18"
+  USER_MENU_NAME = "Supplier User Administration"
+  DESCRIPTION = "POS Supplier User Profile Administration"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Approve Users and Manage User Profiles"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/04/24"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_APPROVE_EXT_USERS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_REG_INVITE_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/InviteConfMainPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Confirm Invite Supplier User to Register"
+  DESCRIPTION = "This function is the invitation confirmation page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_REGISTER_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/RegUserConfPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Confirm Register Supplier User"
+  DESCRIPTION = "This function is the registration confirmation page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_ACCESS_RESTRICT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/RegSecAttrPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Securing Attributes in Registration (2)"
+  DESCRIPTION = "Securing Attributes in Registration (2)"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_ERROR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/RegErrorMainPG&akRegionApplicationId=177"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Registration Error Page"
+  DESCRIPTION = "This function displays the Service Unavailable Error"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SUPP_USER_CREATION_TAB"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2004/02/20"
+  USER_MENU_NAME = "POS Supplier User Creation Tab"
+  DESCRIPTION = "Tab Menu for creating new supplier users"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_INVITE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_REGISTER"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_INVITE_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_REGISTER_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_ACCESS_RESTRICT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_REG_APPROVE_REJECT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/ApprUserPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Approve or Reject Supplier User Registration"
+  DESCRIPTION = "This function approves or rejects supplier user registration"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_APPROVE_REJECT_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/ApprConfPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Confirm Approve or Reject  Supplier User Registration"
+  DESCRIPTION = "This function is the approval / rejection confirmation page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_USER_PROFILE_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/administration/webui/UserProfilePG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "User Profile Page"
+  DESCRIPTION = "User Profile Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_USER_ACCESS_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/administration/webui/UserSecAttrPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Securing Attributes Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_USER_CONF_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/administration/webui/UserConfPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Confirmation Page (1)"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_APPROVE_FULL_ACCESS"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME =
+ "Full access to Approve or Reject Suppier User Registration"
+  DESCRIPTION =
+ "This function permits full access to the approve/reject all pending registrations."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SUPP_USER_PROF_ADM_TAB"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2004/02/20"
+  USER_MENU_NAME = "POS Supplier User Profile Admin Tab"
+  DESCRIPTION = "Tab Menu for supplier user profile admin"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_APPROVE_EXT_USERS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_APPROVE_REJECT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_APPROVE_REJECT_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_ACCESS_RESTRICT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_USER_PROFILE_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_USER_ACCESS_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_USER_CONF_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/09/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_APPROVE_FULL_ACCESS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_SUPP_USER_ADMIN_HP"
+  TYPE = "HOMEPAGE"
+  LAST_UPDATE_DATE = "2004/02/20"
+  USER_MENU_NAME = "POS Supplier User Admin Homepage"
+  DESCRIPTION = "Homepage for supplier user admin"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ISP_BRAND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "ICX_STANDARD_GLOBAL_MENU"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "POS_SUPP_USER_CREATION_TAB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "POS_SUPP_USER_PROF_ADM_TAB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_SUPPLIER_USER_ADMIN"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2003/02/06"
+  USER_MENU_NAME = "Supplier User Management"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Supplier User Creation"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/02/19"
+    SUBMENU = "POS_SUP_USER_CREATION"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier User Administration"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/02/19"
+    SUBMENU = "POS_SUP_USER_PROF_ADMIN"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/20"
+    SUBMENU = "POS_SUPP_USER_ADMIN_HP"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_WINDOW_CLOSE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "javascript:window.close();"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "global_logouticon_enabled.gif"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "POS Close Window Function"
+  DESCRIPTION = "Global Function to close the window"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_GUEST_REG_GLB"
+  TYPE = "GLOBAL"
+  LAST_UPDATE_DATE = "2003/01/08"
+  USER_MENU_NAME = "Guest Supplier Registration Global Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Close"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_WINDOW_CLOSE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Preferences"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/02/14"
+    SUBMENU = "*NULL*"
+    FUNCTION = "ICX_USER_PREFERENCES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_SUPPREG_REGISTER"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/suppreg/webui/PosSRegPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Register a Supplier"
+  DESCRIPTION = "This function creates a supplier and a default supplier user."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPPREG_REG_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/suppreg/webui/PosSRegConfPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration Confirmation"
+  DESCRIPTION = "The Supplier Registration Confirmation Page."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPPREG_ERROR_PAGE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/suppreg/webui/PosSRegErrorPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Registration Error Page"
+  DESCRIPTION = "Supplier registration error page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_PROS_REG"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/onboard/webui/ProspRegPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Prospective Registration Page"
+  DESCRIPTION = "Flexiable Registration Prospective Registration Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_REG_DETAILS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/onboard/webui/ProspRegDetailsPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2005/09/02"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Flexible Registration Supplier Details Page"
+  DESCRIPTION = "Flexiable Registration Supplier Details Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_CREATE_RES"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/creation/webui/ponResponsePG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Create Response Page"
+  DESCRIPTION = "Users can create responses."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_REVIEW_RES"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/creation/webui/ponReviewResPG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Review Response Page"
+  DESCRIPTION = "Users can review responses."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_RESP_ACC_TERMSCOND"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/creation/webui/ponAccTermsCondnPG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Accept Terms & Conditions Page"
+  DESCRIPTION = "Users can accept terms and conditions."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SUPP_REG_STATUS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/onboard/webui/ProsRegStatusPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2013/04/08"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "POS Supplier registration request status"
+  DESCRIPTION = "POS Supplier registration request status"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_ACK_AMENDS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/acknowledge/webui/ponAmendAcksPG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Acknowledge Amendments Page"
+  DESCRIPTION = "Users can acknowledge amendments."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_NEG_SUMMARY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/negotiation/inquiry/webui/ponNegSumPG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Negotiation Summary Page"
+  DESCRIPTION = "Users can view the Negotiation Summary page."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_VIEW_REQUIREMENT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/negotiation/inquiry/webui/ponViewReqPG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Negotiation Summary View Requirement Page"
+  DESCRIPTION = "Users can view requirements in negotiation summary."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PONRESENQ_VIEWBIDHISTORY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/inquiry/webui/ponViewBidHistoryPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Bid History"
+  DESCRIPTION = "Users can view response history."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PONRESENQ_VIEWBID"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/inquiry/webui/ponViewBidPG&OAFunc=PON_VIEW_RESP_CUST_ATTACHMENTS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Bid"
+  DESCRIPTION = "Users can view responses."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_BID_BY_SPREADSHEET"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pon/response/creation/webui/ponSpdsheetBidPG&akRegionApplicationId=396"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Bid By Spreadsheet Page"
+  DESCRIPTION = "Users can submit responses by spreadsheet."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SM_BID_BY_SPREADSHEET"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2010/09/01"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Management: Respond By Spreadsheet"
+  DESCRIPTION = "Supplier Management: Respond By Spreadsheet"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_FLEXREG_ATTACH"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/onboard/webui/ProspRegAttachPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2013/12/25"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME =
+ "Flexible Registration Prospective Registration Attachments"
+  DESCRIPTION = "Flexible Registration Prospective Registration Attachments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "PON_AUC_SUBMIT_BIDB"
+  FORM = "" "*NULL*"
+  TYPE = "SUBFUNCTION"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "*NULL*"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2008/11/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Submit Bid to Buyer's Negotiations"
+  DESCRIPTION = "Users can submit responses to negotiations."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_GUEST_SUPPLIER_REG"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2003/01/08"
+  USER_MENU_NAME = "Guest Supplier Registration Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPREG_REGISTER"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2002/12/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPREG_REG_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2002/12/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPREG_ERROR_PAGE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Flexible Registration Prospective Registration Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/09/13"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_PROS_REG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Flexible Registration Supplier Details Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/09/13"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_REG_DETAILS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Address Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/09/13"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ADD_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Contact Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/09/13"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ADD_CONT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Product Service Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/09/13"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ADD_PS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Add Bank Account Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/09/13"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_SUPPLIER_REG"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/05"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_EXT_ATTR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/23"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_CREATE_RES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/23"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_REVIEW_RES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2009/09/23"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_RESP_ACC_TERMSCOND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Supplier Registration Status Page"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2013/04/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPP_REG_STATUS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2010/02/22"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_ACK_AMENDS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2011/02/24"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_NEG_SUMMARY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2011/02/24"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_VIEW_REQUIREMENT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2011/02/24"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PONRESENQ_VIEWBIDHISTORY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2011/02/24"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PONRESENQ_VIEWBID"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2011/07/11"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_BID_BY_SPREADSHEET"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2011/07/11"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SM_BID_BY_SPREADSHEET"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2013/12/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_FLEXREG_ATTACH"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2014/03/26"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PON_AUC_SUBMIT_BIDB"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_REG_RESPOND"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/UsrRegMainPG&akRegionApplicationId=177"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Respond to Registration Invitation"
+  DESCRIPTION =
+ "This function allows the registration invitee to respond to registration invitation"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_RESPOND_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/UsrRegConfMainPG&akRegionApplicationId=177"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Confirm Respond to  Registration Invitation"
+  DESCRIPTION = "This function is the respond to invite confirmation page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_REG_USR_MESSAGE_PAGE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/registration/webui/UsrRegMsgMainPG&akRegionApplicationId=177"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Information display page for external user approval"
+  DESCRIPTION =
+ "This function displays the infomation/error message regarding registration to external user"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_GUEST_SUPP_USER_REG"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2003/01/08"
+  USER_MENU_NAME = "Guest Supplier User Registration Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_RESPOND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_RESPOND_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_USR_MESSAGE_PAGE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_REG_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_GUEST_REG_HP"
+  TYPE = "HOMEPAGE"
+  LAST_UPDATE_DATE = "2002/12/16"
+  USER_MENU_NAME = "Supplier Registration Homepage"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2002/12/16"
+    SUBMENU = "POS_GUEST_REG_GLB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2002/12/19"
+    SUBMENU = "POS_GUEST_SUPPLIER_REG"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/01/08"
+    SUBMENU = "POS_GUEST_SUPP_USER_REG"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2013/12/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ISP_BRAND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_GUEST_USER_REG"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2002/03/25"
+  USER_MENU_NAME = "Supplier Guest User Menu"
+  DESCRIPTION = "Menu for supplier guest user"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2013/12/25"
+    SUBMENU = "POS_GUEST_REG_HP"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_SUPPLIER_REG_ADMIN"
+  LAST_UPDATE_DATE = "2002/03/25"
+  USER_MENU_NAME = "Supplier Registration Administration"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Review Supplier Registrations"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/03/03"
+    SUBMENU = "*NULL*"
+    FUNCTION = "AP_APXVDMVD"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/01/04"
+    SUBMENU = "POS_HT_SP_HP"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_SUPPLIER_SUMM_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SuppSummPG&OAHP=POS_SPM_BUYER_HP&OASF=POS_SUPPLIER_SUMM_MAIN&OAPB=POS_ISP_BRAND&OAPB=POS_SUPPLIERS_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2006/08/08"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Profile Search"
+  DESCRIPTION = "Supplier Profile Search"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PROFILE_SUP_DETAIL"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SupDetailsPG&akRegionApplicationId=177&OASF=POS_PROFILE_SUP_DETAIL&menu=Y&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Details"
+  DESCRIPTION = "Supplier Details"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_BUYER_ADDR_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrAddrBkPG&akRegionApplicationId=177&addBreadCrumbs=YretainAM=Y&menu=Y&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Address Book Main"
+  DESCRIPTION = "Buyer Address Book Main"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_B_CONT_DIR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/BuyerContDirPG&akRegionApplicationId=20001&menu=Y&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer: View Supplier Contact Directory"
+  DESCRIPTION = "Buyer: View Supplier Contact Directory"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_BC_BUYER_PAGE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/BusClassPG&akRegionApplicationId=20001&menu=Y&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Business Classifications Page ( for Buyer )"
+  DESCRIPTION = "Business classifications page access for the buyer"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PosPSManagePG&menu=Y&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Manage Products and Services"
+  DESCRIPTION =
+ "This function displays a supplier's Products and Services classifications."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PROFILE_ORG_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/OrgPG&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Operating Units in user group"
+  DESCRIPTION = "Operating Unit in user group"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SPM_BUYER_SIDEBAR"
+  TYPE = "SIDEBAR"
+  LAST_UPDATE_DATE = "2004/02/25"
+  USER_MENU_NAME = "POS Supplier Profile Buyer Sidebar"
+  DESCRIPTION = "POS Supplier Profile Buyer Sidebar"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Supplier Details"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PROFILE_SUP_DETAIL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Address Book"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_BUYER_ADDR_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Contact Directory"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_B_CONT_DIR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Business Classifications"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_BC_BUYER_PAGE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Products and Services"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Bank Accounts"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PROFILE_ORG_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_SPM_BUYER_SUBTAB"
+  TYPE = "SUBTAB"
+  LAST_UPDATE_DATE = "2004/02/25"
+  USER_MENU_NAME = "POS Supplier Profile Buyer Subtab"
+  DESCRIPTION = "POS Supplier Profile Buyer Subtab"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Profile Management"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/03/03"
+    SUBMENU = "POS_SPM_BUYER_SIDEBAR"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_SITE_DETAIL_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SiteDetailPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Site Address Details"
+  DESCRIPTION = "Site Address Details"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_BUYER_ERROR_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrAddrErrPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Update to Sites Error Page"
+  DESCRIPTION = "Update to Sites Error Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_CREATE_ADDRBOOK_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/AddrBkCrtPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Create Address Book from Sites"
+  DESCRIPTION = "Create Address Book from Sites"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_ADDRESS_EDIT_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrAddrPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Edit/Create Addresses"
+  DESCRIPTION = "Edit/Create Addresses"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PROFILE_CONF_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/ConfPG&akRegionApplicationId=177&retainAM=Y&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Confirmation Page"
+  DESCRIPTION = "Confirmation Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_ADDR_ERROR_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/AddrBkFailPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Address Book Creation Error Page"
+  DESCRIPTION = "Address Book Creation Error Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_ADDR_WARNING_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/AddrBkWrnPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Address Book Creation Warning Page"
+  DESCRIPTION = "Address Book Creation Warning Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_ADDR_CONF_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/AddrBkConfPG&akRegionApplicationId=177&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Address Book Creation Confirmation Page"
+  DESCRIPTION = "Address Book Creation Confirmation Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_BC_SUPPLIER_PAGE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/BusClassPG&akRegionApplicationId=20001&menu=Y&addBreadCrumb=RS"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/03/16"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Business Classifications Page"
+  DESCRIPTION = "Business Classifications Page ( for Supplier )"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_BC_BUYER_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SPConfPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Business Classifications Confirmation Page"
+  DESCRIPTION = "Business Classification confirmation page."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_B_VIEW_ADDR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SuppContAddrPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer: Manage Address Detail for Supplier Contact"
+  DESCRIPTION = "Buyer: Manage Address Details for Supplier Contact"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_B_CR_CONT_FR_SITES"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrSiteContactPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer: Create Supplier Contact from Site Contacts"
+  DESCRIPTION = "Buyer: Create Supplier Contact from Site Contacts"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_B_MNG_STE_CONTCT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrMngStCntPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer: Manage Supplier Site Contact Details"
+  DESCRIPTION = "Buyer: Manage Supplier Site Contact Details"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_S_NEW_CONTACT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SuppNewContPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Create New Supplier Contact"
+  DESCRIPTION = "Create New Supplier Contact"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_S_EDIT_CONTACT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SuppEditContPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Edit Supplier Contact"
+  DESCRIPTION = "Edit Supplier Contact"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SP_S_VIEW_ADDR_DET"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/SuppContAddrPG&akRegionApplicationId=20001&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier: Manage Address Detail for Contact"
+  DESCRIPTION = "Manage Address details for contact ( Supplier View )"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_VIEW_SUB_CATEGORY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PosPSSubCatPG&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "View Products and Services Sub-Categories"
+  DESCRIPTION =
+ "This function displays a Products and Services' sub categories."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_NEW_PS"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PosPSNewPSPG&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "New Products and Services"
+  DESCRIPTION =
+ "This function displays new Products and Services for classification."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PosPSConfPG&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Products and Services Confirmation"
+  DESCRIPTION =
+ "This function is the confirmation page for Products and Services actions."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_ERROR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PosPSErrorPG&menu=Y"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/06/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Products and Services Error Page"
+  DESCRIPTION = "This function is the error page for Products and Services."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_MNG_BYR_ACCT_ASSIGN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrAcctAssignPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Manage Bank Account Assignments"
+  DESCRIPTION = "Manage Bank Account Assignments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_PEND_INVOICE"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/PendingInvoicesPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Pending Invoices"
+  DESCRIPTION = "Pending Invoices"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_INVOICE_MAIN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/sbd/webui/DeactivatedAccountsPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Deactivate Bank Accounts"
+  DESCRIPTION = "Deactivate Bank Accounts"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_AUDIT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrAuditPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Audit Page"
+  DESCRIPTION = "Buyer Audit Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BYR_PRIMARY_WRN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrPriWrnPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Banking Primary Conflict Warning Page"
+  DESCRIPTION = "Buyer Banking Primary Conflict Warning Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_NEW"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrNwActPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Supplier Banking Buyer New Account Page"
+  DESCRIPTION = "Supplier Banking Buyer New Account Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYR_AP_ERROR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrAPActWrnPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Banking AP Error Page"
+  DESCRIPTION = "Buyer Banking AP Error Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BANK_INFO"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/BankInfoPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Bank Branch Information Page"
+  DESCRIPTION = "Bank Branch Information  Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BYR_ACT_WRN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrActWrnPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Administrator Duplicate Account Warning Page"
+  DESCRIPTION = "Administrator Duplicate Account Warning Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_EDIT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrEditPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Edit Bank Account"
+  DESCRIPTION = "Buyer Edit Bank Account"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_APV_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrApvConfPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Approve Confirmation Bank Account"
+  DESCRIPTION = "Buyer Approve Confirmation Bank Account"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_ADDR_COPY"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrCopyAddrPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Copy Addres Assignments from Another Account"
+  DESCRIPTION = "Copy Addres Assignments from Another Account"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BANK_DETAIL"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/BankDetailPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/09/19"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Bank Details"
+  DESCRIPTION = "Bank Details"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BUYER_RMV"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrActRmvPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/10/14"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Remove Account Action Confirmation Page"
+  DESCRIPTION = "Buyer Remove Account Action Confirmation Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_MULTI_SUPP_ACT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrMultiActPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/10/28"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Approval of accounts to multiple suppliers"
+  DESCRIPTION = "Buyer Approval of accounts to multiple suppliers"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_ACCT_ADDR_WRN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/profile/webui/ByrAddrAsgWrnPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/10/31"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Address Account Assignments Warning Page"
+  DESCRIPTION = "Buyer Address Account Assignments Warning Page"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BYR_RMV_ACT"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrRmvNonPriPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/12/22"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Non Primary Account Assignments"
+  DESCRIPTION = "Buyer Non Primary Account Assignments"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_BYR_EDIT_WRN"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ByrEditWrnPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/01/27"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Buyer Edit Flow Warning"
+  DESCRIPTION = "Buyer Edit Flow Warning"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_SBD_CONCURRENT_ERROR"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL = "OA.jsp?page=/oracle/apps/pos/sbd/webui/ConErrorPG"
+  WEB_ENCRYPT_PARAMETERS = "N"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/02/26"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Concurrent Error Page"
+  DESCRIPTION =
+ "Page which is displayed when the different users access the same flow simulateneously"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SPM_BUYER_ADMIN_TAB"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2004/02/25"
+  USER_MENU_NAME = "POS Supplier Profile Buyer Admin Tab"
+  DESCRIPTION = "POS Supplier Profile Buyer Admin Tab"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "POS_SPM_BUYER_SUBTAB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIER_SUMM_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PROFILE_ORG_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SITE_DETAIL_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_BUYER_ERROR_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_CREATE_ADDRBOOK_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ADDRESS_EDIT_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PROFILE_CONF_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ADDR_ERROR_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ADDR_WARNING_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ADDR_CONF_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_BC_SUPPLIER_PAGE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_BC_BUYER_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_B_VIEW_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_B_CR_CONT_FR_SITES"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_B_MNG_STE_CONTCT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_S_NEW_CONTACT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_S_EDIT_CONTACT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SP_S_VIEW_ADDR_DET"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_VIEW_SUB_CATEGORY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_NEW_PS"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_MNG_BYR_ACCT_ASSIGN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_PEND_INVOICE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_INVOICE_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_AUDIT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BYR_PRIMARY_WRN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_NEW"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYR_AP_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BANK_INFO"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BYR_ACT_WRN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_EDIT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_APPROVE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_MNG_ADDR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_PRENOTE"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_APV_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_ADDR_COPY"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BANK_DETAIL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BUYER_RMV"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_MULTI_SUPP_ACT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_ACCT_ADDR_WRN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BYR_RMV_ACT"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_BYR_EDIT_WRN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/26"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SBD_CONCURRENT_ERROR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN FUNCTION "POS_PS_DEFSETUP"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PSDefSetupPG&OAHP=POS_SPM_BUYER_HP&OASF=POS_PS_DEFSETUP&OAPB=POS_ISP_BRAND"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2004/02/25"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Setup Products and Services Definition"
+  DESCRIPTION = "Setup products and services definition"
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_DEFSETUP_CONF"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PSDefSetupConfirmPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/08/20"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Products and Services Definition Setup Confirmation"
+  DESCRIPTION =
+ "The confirmation page for Products and Services Definition Setup."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN FUNCTION "POS_PS_DEFSETUP_REAFFIRM"
+  FORM = "" "*NULL*"
+  TYPE = "JSP"
+  PARAMETERS = "*NULL*"
+  WEB_HOST_NAME = "*NULL*"
+  WEB_AGENT_NAME = "*NULL*"
+  WEB_HTML_CALL =
+ "OA.jsp?page=/oracle/apps/pos/profile/webui/PSDefSetupReaffirmPG"
+  WEB_ENCRYPT_PARAMETERS = "Y"
+  WEB_SECURED = "N"
+  WEB_ICON = "*NULL*"
+  FUNC_OBJECT = "*NULL*"
+  OBJECT_NAME = "*NULL*"
+  REGION_CODE = "*NULL*"
+  LAST_UPDATE_DATE = "2003/08/20"
+  MAINTENANCE_MODE_SUPPORT = "NONE"
+  CONTEXT_DEPENDENCE = "RESP"
+  JRAD_REF_PATH = "*NULL*"
+  USER_FUNCTION_NAME = "Products and Services Definition Setup Reaffirm"
+  DESCRIPTION =
+ "This page asks the user to reaffirm the changes made to Products and Services Definition Setup."
+  OWNER = "ORACLE12.1.3"
+END FUNCTION
+
+BEGIN MENU "POS_SPM_BUYER_SETUP_TAB"
+  TYPE = "TAB"
+  LAST_UPDATE_DATE = "2004/02/25"
+  USER_MENU_NAME = "POS Supplier Profile Buyer Setup Tab"
+  DESCRIPTION = "POS Supplier Profile Buyer Setup Tab"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_DEFSETUP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_DEFSETUP_CONF"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_PS_DEFSETUP_REAFFIRM"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_SPM_BUYER_HP"
+  TYPE = "HOMEPAGE"
+  LAST_UPDATE_DATE = "2004/02/25"
+  USER_MENU_NAME = "POS Supplier Profile Buyer Homepage"
+  DESCRIPTION = "POS Supplier Profile Buyer Homepage"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_ISP_BRAND"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "ICX_STANDARD_GLOBAL_MENU"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "POS_SPM_BUYER_ADMIN_TAB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "POS_SPM_BUYER_SETUP_TAB"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_BUYER_SUP_PROF_ADMIN"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2003/01/28"
+  USER_MENU_NAME = "Supplier Profile Administration"
+  DESCRIPTION = "Supplier Profile Administration"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Manage Profiles"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/02/06"
+    SUBMENU = "*NULL*"
+    FUNCTION = "POS_SUPPLIER_SUMM_MAIN"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2004/02/25"
+    SUBMENU = "POS_SPM_BUYER_HP"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "POS_SUPPLIER_ADMIN"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "2003/02/06"
+  USER_MENU_NAME = "Supplier Management"
+  DESCRIPTION = "Buyer's Supplier Management Root Menu"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/07/21"
+    SUBMENU = "POS_SUPPLIER_REG_ADMIN"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/07/21"
+    SUBMENU = "POS_BUYER_SUP_PROF_ADMIN"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
+BEGIN MENU "PO_SUPPLY_BASE_GUI"
+  TYPE = "STANDARD"
+  LAST_UPDATE_DATE = "1996/06/28"
+  USER_MENU_NAME = "Supply Base:  Management"
+  DESCRIPTION = "Oracle Purchasing Supply Base Management Menu GUI"
+  OWNER = "ORACLE12.1.3"
+
+  BEGIN ENTRY
+    PROMPT = "Suppliers"
+    DESCRIPTION = "Suppliers"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2005/10/05"
+    SUBMENU = "POS_HT_SP_FULL_ACCESS_MENU"
+    FUNCTION = "AP_APXVDMVD"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier Merge"
+    DESCRIPTION = "Supplier Merge"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1996/12/19"
+    SUBMENU = "*NULL*"
+    FUNCTION = "AP_APXVDDUP"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier Lists"
+    DESCRIPTION = "Supplier Lists"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PO_POXQUEMQ"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Approved Supplier List"
+    DESCRIPTION = "Define Approved Supplier List"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PO_POXSCASL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Summary Approved Supplier List"
+    DESCRIPTION = "View Approved Supplier List"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PO_POXSVASL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier Statuses"
+    DESCRIPTION = "Define Approved Supplier List Statuses"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "PO_POXSTASL"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Sourcing Rules"
+    DESCRIPTION = "Define Sourcing Rules"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFDDSRDSR"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Assign Sourcing Rules"
+    DESCRIPTION = "Assign Sourcing Rules/BOD"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "MRPFDSRADSA"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "*NULL*"
+    FUNCTION = "JG_ENABLE_GLOBAL_FLEX"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "1980/01/01"
+    SUBMENU = "PO_SUPPLY_BASE_FUNCTIONS"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier User Management"
+    DESCRIPTION = "Supplier User Management"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/03/26"
+    SUBMENU = "POS_SUPPLIER_USER_ADMIN"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "Supplier Guest User Menu"
+    DESCRIPTION = "Supplier Guest User Menu"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2003/03/26"
+    SUBMENU = "POS_GUEST_USER_REG"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+  BEGIN ENTRY
+    PROMPT = "*NULL*"
+    DESCRIPTION = "Not used. Keep Prompt Null"
+    GRANT_FLAG = "Y"
+    LAST_UPDATE_DATE = "2006/07/21"
+    SUBMENU = "POS_SUPPLIER_ADMIN"
+    FUNCTION = "*NULL*"
+    OWNER = "ORACLE12.1.3"
+  END ENTRY
+  
+END MENU
+
